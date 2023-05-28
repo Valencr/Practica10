@@ -1,0 +1,383 @@
+{Crea un registro llamado "Estudiante" con los campos "nombre" (cadena de
+caracteres), "edad" (entero) y "promedio" (real). Luego, declara un arreglo de 5
+estudiantes y llena los datos de cada uno. Finalmente, muestra en pantalla el
+nombre del estudiante con el promedio más alto.}
+
+program registro1 ; 
+type
+Estudiante = record
+nombre:string ; 
+edad:integer ; 
+promedio:real ; 
+end;
+type
+vector = array [1..5] of estudiante ;
+var
+vector1:vector ; 
+i : integer ; 
+m: string ; 
+max:real ; 
+
+begin
+max:=-1;
+for i:=1 to 5 do
+begin
+	writeln('Ingrese nombre ');
+	readln(vector1[i].nombre) ; 
+	writeln('Ingrese edad');
+	readln(vector1[i].edad) ; 
+	writeln('Ingrese promedio');
+	readln(vector1[i].promedio) ;
+	if (vector1[i].promedio >= max) then begin
+		max:=vector1[i].promedio ;
+		 m:=vector1[i].nombre ; 
+										end;
+end;
+writeln('El promedio mas alto es : ',max:0:1, ' y el nombre : ',m );
+end.
+----------------------------------------------------------------------------------------------------------------------
+
+{ Crea un registro llamado "Empleado" con los campos "nombre" (cadena de
+caracteres) y "salario" (real). Escribe una función llamada "AumentarSalario" que
+tome como parámetro un empleado y un porcentaje de aumento, y actualice el
+salario del empleado según el porcentaje dado. Luego, crea un empleado, muestra
+su salario actual y aplica un aumento del 10%. Muestra el nuevo salario por pantalla.}
+
+program registrosej2 ; 
+type
+Empleado = record
+nombre : string ; 
+salario : real ; 
+end;
+
+function AumentarSalario(empleado: Empleado ;  porcentaje : real  ): Empleado ;
+begin
+empleado.salario := empleado.salario + (empleado.salario * porcentaje) / 100;
+AumentarSalario := empleado;
+
+
+end;
+var
+empleado1: Empleado ; 
+porcentaje : real ;   
+
+begin
+writeln('Ingrese nombre');
+readln(empleado1.nombre);
+writeln('INgrese salario') ; 
+readln(empleado1.salario) ; 
+writeln('Salario actual:', empleado1.salario:0:2);
+
+writeln('Ingrese porcentaje de aumento:');
+readln(porcentaje);
+
+empleado1 := AumentarSalario(empleado1, porcentaje);
+
+writeln('Nuevo salario:', empleado1.salario:0:2);
+end.
+----------------------------------------------------------------------------------------------------------------------
+
+{Crea un registro llamado "Punto" con los campos "x" e "y" de tipo real. Escribe una
+función llamada "DistanciaOrigen" que tome como parámetro un punto y calcule la
+distancia entre dicho punto y el origen (0,0). Luego, declara dos puntos y muestra la
+distancia de cada uno al origen.}
+program registroej3;
+
+type
+  Punto = record
+    x: real;
+    y: real;
+  end;
+
+function DistanciaOrigen(Punto1: Punto): real;
+begin
+  DistanciaOrigen := sqrt(Punto1.x * Punto1.x + Punto1.y * Punto1.y);
+end;
+
+var
+  Punto1,Punto2: Punto;
+
+begin
+  writeln('Ingrese el punto');
+  readln(Punto1.x, Punto1.y);
+  writeln('INgrese el segundo punto');
+  readln(Punto2.x,Punto2.y) ; 
+  
+  writeln('La distancia del primer punto : ', DistanciaOrigen(Punto1):0:2);
+  writeln('La distancia del segundo punto : ', DistanciaOrigen(Punto2):0:2);
+  
+end.
+----------------------------------------------------------------------------------------------------------------------
+
+{Crea un registro llamado "Producto" con los campos "nombre" (cadena de
+caracteres) y "precio" (real). Escribe un procedimiento llamado "MostrarProducto"
+que tome como parámetro un producto y muestre su nombre y precio en pantalla.
+Luego, crea un producto y muestra sus datos utilizando el procedimiento
+"MostrarProducto".}
+
+program registroej4 ;
+type
+Producto = record
+nombre : string ; 
+precio : real ; 
+end;
+
+procedure MostrarProducto( Producto1:Producto) ;
+begin
+if (Producto1.nombre = 'hola') then begin
+	writeln('El nombre es : ',Producto1.nombre ) ;
+	writeln('Precio : 12 ' );
+	end  
+	else
+		begin
+			writeln('Ingrese el precio:');
+			readln(Producto1.precio);
+			writeln('Precio: ', Producto1.precio:0:2);
+		end;
+end;
+var Producto1: Producto ;
+begin
+writeln('Nombre:');
+readln(Producto1.nombre);
+MostrarProducto(Producto1) ; 
+
+end.
+----------------------------------------------------------------------------------------------------------------------
+
+{Utilizando lo visto en arreglos, generar un programa que lea 5 productos lo guarde
+en un arreglo y posteriormente utilice un procedimiento que imprima el producto de
+mayor precio.}
+
+program registrosej5 ; 
+type
+Producto = record 
+nombre: string ; 
+precio : real
+end;
+
+type
+vector = array [1..5] of Producto ;
+
+procedure MayorPrecio (vector1 : vector);
+var i ,pos : integer;
+	max : real ; 
+begin
+max:=-1;
+for i:=1 to 5 do begin
+	 if (vector1[i].precio > max) then begin
+		max:=vector1[i].precio ; 
+		pos:= i ;
+										end;
+				end;
+writeln('El producto de mayor precio es: ');
+ writeln('Nombre: ', vector1[pos].nombre);
+ writeln('Precio: ', max:0:2);				
+end;
+
+var
+  vector1: vector;
+  i: integer;
+
+begin
+  for i := 1 to 5 do
+  begin
+    writeln('Ingrese el nombre del producto ', i);
+    readln(vector1[i].nombre);
+    writeln('Ingrese el precio');
+    readln(vector1[i].precio);
+  end;
+
+  MayorPrecio(vector1);
+end.
+
+----------------------------------------------------------------------------------------------------------------------
+{Crea un registro llamado "Libro" con los campos "título" (cadena de caracteres) y
+"autor" (cadena de caracteres). Luego, declara un arreglo de libros con capacidad
+para 10 elementos. Pide al usuario que ingrese los datos de cada libro y al final
+muestra todos los libros ingresados.}
+
+program registrosej6 ; 
+type
+Libro = record
+titulo : string ; 
+autor : string ; 
+end;
+
+type
+VectorLibros = array [1..10] of Libro ;
+
+var VectorLibros1 : VectorLibros ; 
+	i : integer ; 
+begin
+for i:=1 to 10 do begin
+	writeln('Ingrese titulo');
+	readln(VectorLibros1[i].titulo);
+	writeln('Ingrese autor') ; 
+	readln(VectorLibros1[i].autor) ; 
+					end;	
+writeln('Libros ingresados:');
+for i := 1 to 10 do begin
+    writeln('Titulo: ',i,' - ', VectorLibros1[i].titulo);
+    writeln('Autor: ',i,' - ', VectorLibros1[i].autor);
+					end;
+
+end.
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+{Crea un registro llamado "Alumno" con los campos "nombre" (cadena de caracteres)
+y "calificaciones" (arreglo de enteros). Luego, declara un arreglo de alumnos con
+capacidad para 5 elementos. Pide al usuario que ingrese el nombre y las
+calificaciones de cada alumno, y al final muestra el promedio de cada uno.}
+
+program arreglosej7;
+
+type
+  Alumno = record
+  nombre: string;
+  calificaciones: array [1..5] of integer;
+  end;
+
+type
+VectorAlumnos = array [1..5] of Alumno;
+
+var
+i, j: integer;
+promedio: real;
+vectorAlumnos1: VectorAlumnos;
+
+begin
+for i := 1 to 5 do
+  begin
+	writeln('Ingrese nombre del alumno:');
+	readln(vectorAlumnos1[i].nombre);
+	promedio := 0;
+    for j := 1 to 5 do
+    begin
+		writeln('Ingrese calificacion ', j, ' del alumno ', i, ':');
+		readln(vectorAlumnos1[i].calificaciones[j]);
+		promedio := promedio + vectorAlumnos1[i].calificaciones[j];
+	end;	
+		promedio := promedio / 5;
+		writeln('El promedio del alumno ', i, ' es: ', promedio:0:2);
+end;
+end.
+----------------------------------------------------------------------------------------------------------------------
+
+{Crea un registro llamado "Empleado" con los campos "nombre" (cadena de
+caracteres) y "departamento" (cadena de caracteres). Luego, declara un arreglo de
+empleados con capacidad para 8 elementos. Pide al usuario que ingrese el nombre
+*  y el departamento de cada empleado y al final muestra todos los empleados del
+departamento "Ventas".
+}
+
+program arreglosej10 ; 
+type
+Empleado = record
+nombre : string ;
+departamento : string ; 
+end;
+
+type
+VectorEmpleados = array [1..8] of Empleado ; 
+
+var VectorEmpleados1 : VectorEmpleados ; 
+	i,cant : integer ; 
+
+begin
+cant:=0;
+for i:=1 to 8 do begin
+	writeln('Ingrese nombre');
+	readln(VectorEmpleados1[i].nombre) ; 
+	writeln('Ingrese departamento : ') ; 
+	readln(VectorEmpleados1[i].departamento) ;
+	
+	if (VectorEmpleados1[i].departamento = 'ventas') then
+		cant:=cant + 1 ; 
+				end;
+
+writeln('La cantidad de empleados que hay en ventas es : ',cant) ; 
+
+end.
+
+----------------------------------------------------------------------------------------------------------------------
+{Crea un registro llamado "Contacto" con los campos "nombre" (cadena de
+caracteres) y "telefono" (cadena de caracteres). Luego, declara un arreglo de
+contactos con capacidad para 20 elementos. Pide al usuario que ingrese el nombre y
+el teléfono de cada contacto. Luego, permite al usuario buscar un contacto por
+nombre y muestra su número de teléfono.}
+
+program registroej9 ; 
+type
+Contacto = record
+nombre : string ;
+telefono : string ; 
+end;
+
+type
+VectorContactos = array [1..20] of Contacto ;
+
+var VectorContactos1 : VectorContactos ;  
+	i : integer;
+	n : string ; 
+
+begin
+for i :=1 to 3 do begin
+	writeln('Ingrese nombre : ');
+	readln(VectorContactos1[i].nombre) ; 
+	writeln('Ingrese numero');
+	readln(VectorContactos1[i].telefono) ; 
+					end;
+writeln('Ingrese el nombre a buscar') ; 
+readln(n) ; 
+for i:= 1 to 3 do begin
+	if ( n = VectorContactos1[i].nombre ) then
+		writeln('El numero de ', n ,' es : ',VectorContactos1[i].telefono) ; 
+					end;
+end. 
+
+----------------------------------------------------------------------------------------------------------------------
+
+{Crea un registro llamado "Producto" con los campos "nombre" (cadena de
+caracteres) y "precio" (real). Luego, declara un arreglo de productos con capacidad
+para 100 elementos. Pide al usuario que ingrese el nombre y el precio de cada
+producto y al final muestra el producto más caro y el producto más barato}
+
+program registroej10 ;
+type
+Producto = record 
+nombre : string ; 
+precio : real ;
+end;
+
+type
+VectorProductos = array [1..100] of Producto ; 
+
+var i : integer ; 
+	min, max : real ; 
+	NombreProductoMax,NombreProductoMin : string ; 
+	VectorProductos1 : VectorProductos ; 
+
+begin
+max:=-1;
+min:=999;
+for i:=1 to 100 do begin
+	writeln('Ingrese nombre');
+	readln(VectorProductos1[i].nombre) ; 
+	writeln('Ingrese precio') ; 
+	readln(VectorProductos1[i].precio) ; 
+	if (VectorProductos1[i].precio > max) then begin
+		max:=VectorProductos1[i].precio ; 
+		NombreProductoMax:=VectorProductos1[i].nombre ; 
+												end
+	else
+		if (VectorProductos1[i].precio < min) then begin
+			min:=VectorProductos1[i].precio;
+			NombreProductoMin:=VectorProductos1[i].nombre;
+			
+													end;
+					 end;
+writeln('El producto mas caro es : ',NombreProductoMax,' Con un precio de : ',max:0:2);
+writeln('El producto mas barato es : ',NombreProductoMin,' Con un precio de :',min:0:2);
+end.
